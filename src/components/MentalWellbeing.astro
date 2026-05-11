@@ -2,10 +2,10 @@
 import { Icon } from 'astro-icon/components';
 
 const cards = [
-  { rot: -18, ty: 28, label: 'guidance', image: '/guidence.png' },
-  { rot: -6, ty: 4, label: 'stretch', image: '/stretch.png' },
-  { rot: 6, ty: 4, label: 'movement', image: '/movement.png' },
-  { rot: 18, ty: 28, label: 'rest', image: '/rest.png' },
+  { rot: -18, ty: 28, label: 'guidance', image: `${import.meta.env.BASE_URL}guidence.png` },
+  { rot: -6, ty: 4, label: 'stretch', image: `${import.meta.env.BASE_URL}stretch.png` },
+  { rot: 6, ty: 4, label: 'movement', image: `${import.meta.env.BASE_URL}movement.png` },
+  { rot: 18, ty: 28, label: 'rest', image: `${import.meta.env.BASE_URL}rest.png` },
 ];
 const mid = (cards.length - 1) / 2;
 ---
