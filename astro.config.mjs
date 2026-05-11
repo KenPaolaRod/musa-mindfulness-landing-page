@@ -7,7 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://kenpaolarod.github.io',
-  base: '/musa-mindfulness-landing-page',
+  base: '/musa-mindfulness-landing-page/',
   fonts: [
     {
       provider: fontProviders.google(),
