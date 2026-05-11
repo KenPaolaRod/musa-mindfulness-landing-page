@@ -8,7 +8,7 @@ const TESTIMONIALS = [
     italic: 'experience my life',
     name: 'Lena M.',
     meta: 'Practicing 14 months',
-    photo: '/Lena.png',
+    photo: `${import.meta.env.BASE_URL}Lena.png`,
   },
   {
     quote:
@@ -16,7 +16,7 @@ const TESTIMONIALS = [
     italic: 'where I actually live',
     name: 'Priya R.',
     meta: 'Practicing 8 months',
-    photo: '/Priya.png',
+    photo: `${import.meta.env.BASE_URL}Priya.png`,
   },
   {
     quote:
@@ -24,7 +24,7 @@ const TESTIMONIALS = [
     italic: 'stay with myself',
     name: 'Marcus T.',
     meta: 'Practicing 2 years',
-    photo: '/marcus.png',
+    photo: `${import.meta.env.BASE_URL}marcus.png`,
   },
 ];
 
@@ -41,7 +41,7 @@ const PILLS = [
 <section class="relative overflow-hidden bg-black px-6 pt-0 pb-32 text-white md:pb-44">
   <video
     class="absolute inset-0 h-full w-full object-cover"
-    src="/tstimonials-bg.mp4"
+    src={`${import.meta.env.BASE_URL}tstimonials-bg.mp4`}
     autoplay
     muted
     loop

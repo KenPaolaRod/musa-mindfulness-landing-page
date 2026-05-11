@@ -55,7 +55,7 @@ const year = new Date().getFullYear();
       class="flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-8 md:flex-row"
     >
       <div class="flex items-center gap-3 text-white/80">
-        <img src="/logo.png" alt="Asme" class="h-8 w-auto" />
+        <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Asme" class="h-8 w-auto" />
         <span class="font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">
           © {year}
         </span>
