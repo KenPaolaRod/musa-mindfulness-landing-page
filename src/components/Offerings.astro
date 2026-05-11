@@ -1,0 +1,156 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const items = [
+  {
+    tag: '01 / Audio',
+    title: 'Guided Meditations',
+    body: 'Sessions designed for both beginners and experienced practitioners. Calm, focused audio that meets you wherever you are — commute, lunch break, before bed.',
+    placeholder: 'audio session cover',
+    level: 'beginner, intermediate',
+  },
+  {
+    tag: '02 / Path',
+    title: 'Structured Programs',
+    body: 'Step-by-step plans to build a consistent practice. Each program layers technique, reflection, and gentle accountability over a few focused weeks.',
+    placeholder: 'program illustration',
+    level: 'intermediate',
+  },
+  {
+    tag: '03 / Daily',
+    title: 'Everyday Mindfulness',
+    body: 'Practical tools for work, relationships, and personal well-being. Small rituals you can fold into ordinary days without rearranging your life.',
+    placeholder: 'lifestyle photo',
+    level: 'all levels',
+  },
+];
+---
+
+<section
+  id="practices"
+  class="relative overflow-hidden bg-black px-6 py-32 text-white md:py-40"
+>
+  <div class="relative mx-auto max-w-6xl">
+    <div class="reveal mb-16 flex flex-col gap-6 md:mb-20 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="font-mono mb-6 text-[10px] tracking-[0.3em] text-white/40 uppercase">
+          Section 03 / Practices
+        </p>
+        <h2 class="practices-heading font-serif tracking-tight">
+          Ways to <em class="italic">begin</em>
+        </h2>
+      </div>
+      <p class="text-sm leading-relaxed text-pretty text-white/60 md:max-w-sm">
+        Three doors into the same room. Pick whichever feels closest to where you are right now.
+      </p>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-3 md:gap-6">
+      {
+        items.map((it, i) => (
+          <article
+            tabindex="0"
+            class="offering-card liquid-glass reveal relative flex cursor-pointer flex-col rounded-3xl p-5 outline-none md:p-6"
+            style={`transition-delay: ${i * 100}ms;`}
+          >
+            <div class:list={[
+              'relative flex aspect-[4/5] items-end overflow-hidden',
+              i === 0
+                ? '-mx-5 -mt-5 md:-mx-6 md:-mt-6 rounded-t-3xl'
+                : i === 1
+                  ? '-mx-5 -mt-5 md:-mx-6 md:-mt-6 rounded-t-3xl'
+                  : '-mx-5 -mt-5 md:-mx-6 md:-mt-6 rounded-t-3xl'
+            ]}>
+              {i === 0 && (
+                <img
+                  src="/Guided Meditations.png"
+                  alt="Guided Meditations"
+                  class="pointer-events-none absolute inset-0 h-full w-full object-cover"
+                />
+              )}
+              {i === 1 && (
+                <img
+                  src="/Structured Programs.png"
+                  alt="Structured Programs"
+                  class="pointer-events-none absolute inset-0 h-full w-full object-cover"
+                />
+              )}
+              {i === 2 && (
+                <img
+                  src="/Everyday-Mindfulness.png"
+                  alt="Everyday Mindfulness"
+                  class="pointer-events-none absolute inset-0 h-full w-full object-cover"
+                />
+              )}
+              <div class="card-image-overlay pointer-events-none absolute inset-0" />
+            </div>
+
+            <div class="flex flex-1 flex-col gap-4 pt-6 pb-2">
+              <p class="font-mono text-[10px] tracking-[0.3em] text-white/40 uppercase">{it.tag}</p>
+              <h3 class="offering-title font-serif leading-tight text-white">{it.title}</h3>
+              <p class="text-sm leading-relaxed text-pretty text-white/65">{it.body}</p>
+              <div class="mt-auto pt-4 pr-14 text-sm text-white/55">
+                <span class="font-medium text-white/85">Level: </span>
+                <span class="font-serif italic">{it.level}</span>
+              </div>
+            </div>
+
+            <span
+              aria-hidden="true"
+              class="offering-cta liquid-glass absolute right-5 bottom-5 flex h-11 w-11 items-center justify-center rounded-full text-white/60 md:right-6 md:bottom-6"
+            >
+              <Icon name="lucide:arrow-up-right" size={16} stroke-width={1.75} />
+            </span>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .practices-heading {
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    line-height: 1.05;
+  }
+
+  .offering-title {
+    font-size: clamp(1.5rem, 3vw, 1.7rem);
+  }
+
+  .card-image-overlay {
+    background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.55) 100%);
+  }
+
+  .offering-card {
+    transition:
+      transform 500ms ease,
+      opacity 900ms ease;
+  }
+
+  .offering-cta {
+    transition:
+      color 300ms ease,
+      transform 300ms ease;
+  }
+
+  @media (min-width: 768px) {
+    .offering-card:hover,
+    .offering-card:focus-visible {
+      transform: translateY(-4px);
+    }
+  }
+
+  .offering-card:hover .offering-cta,
+  .offering-card:focus-visible .offering-cta {
+    color: rgb(255 255 255);
+    transform: scale(1.05);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .offering-card,
+    .offering-cta {
+      transition: none;
+    }
+  }
+</style>

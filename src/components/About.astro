@@ -1,0 +1,45 @@
+---
+
+---
+
+<section id="about" class="relative overflow-hidden bg-black px-6 py-32 text-white md:py-40">
+  <div class="relative mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-12 md:gap-16">
+    <div class="reveal md:col-span-5">
+      <div class="relative aspect-[4/5] overflow-hidden rounded-3xl">
+        <div class="about-overlay pointer-events-none absolute inset-0 z-10"></div>
+        <img
+          src="/founder.png"
+          alt="Founder portrait"
+          class="h-full w-full object-cover object-top"
+        />
+      </div>
+    </div>
+
+    <div class="reveal md:col-span-7" style="transition-delay: 120ms;">
+      <p class="font-mono mb-6 text-[10px] tracking-[0.3em] text-white/40 uppercase">
+        Section 04 / About
+      </p>
+      <h2 class="about-heading font-serif mb-8 tracking-tight">
+        Well-being starts<br /><em class="italic">from within.</em>
+      </h2>
+      <p class="mb-6 text-lg leading-relaxed text-pretty text-white/75 md:text-xl">
+        We believe well-being starts from within.
+      </p>
+      <p class="max-w-xl text-base leading-relaxed text-pretty text-white/60">
+        Our mission is to help you build a more conscious relationship with yourself and the world
+        around you.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-heading {
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    line-height: 1.05;
+  }
+
+  .about-overlay {
+    background: linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, 0.55) 100%);
+  }
+</style>

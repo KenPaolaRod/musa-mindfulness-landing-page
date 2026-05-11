@@ -1,0 +1,85 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const columns = [
+  { title: 'Practice', links: ['Meditations', 'Programs', 'Everyday tools'] },
+  { title: 'Learn', links: ['What is mindfulness', 'How it works', 'Journal'] },
+  { title: 'Company', links: ['About', 'Manifesto', 'Contact'] },
+  { title: 'Legal', links: ['Privacy', 'Terms', 'Cookies'] },
+];
+
+const socials = [
+  { icon: 'lucide:instagram', label: 'Instagram' },
+  { icon: 'lucide:twitter', label: 'Twitter' },
+  { icon: 'lucide:globe', label: 'Website' },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="relative overflow-hidden bg-black px-6 pt-20 pb-12 text-white">
+  <div class="mx-auto max-w-6xl">
+    <div class="hairline mb-16"></div>
+
+    <div class="reveal mb-20 text-center">
+      <p class="footer-quote font-serif tracking-tight text-white/85">
+        Breathe. <em class="text-white/60 italic">Notice.</em> Be present.
+      </p>
+    </div>
+
+    <nav class="mb-16 grid grid-cols-2 gap-8 md:grid-cols-4" aria-label="Footer">
+      {
+        columns.map((col) => (
+          <div>
+            <p class="font-mono mb-4 text-[10px] tracking-[0.3em] text-white/40 uppercase">
+              {col.title}
+            </p>
+            <ul class="space-y-2">
+              {col.links.map((link) => (
+                <li>
+                  <a
+                    href="#"
+                    class="text-sm text-white/75 transition-colors hover:text-white"
+                  >
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </nav>
+
+    <div
+      class="flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-8 md:flex-row"
+    >
+      <div class="flex items-center gap-3 text-white/80">
+        <img src="/logo.png" alt="Asme" class="h-8 w-auto" />
+        <span class="font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">
+          © {year}
+        </span>
+      </div>
+      <div class="flex items-center gap-3">
+        {
+          socials.map((s) => (
+            <button
+              type="button"
+              aria-label={s.label}
+              class="liquid-glass rounded-full p-3 text-white/80 transition-all hover:bg-white/5 hover:text-white"
+            >
+              <Icon name={s.icon} size={16} stroke-width={1.75} />
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-quote {
+    font-size: clamp(1.875rem, 4vw, 3rem);
+    line-height: 1.2;
+  }
+</style>

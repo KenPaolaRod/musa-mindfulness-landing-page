@@ -1,0 +1,403 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const TESTIMONIALS = [
+  {
+    quote:
+      'Mindfulness helped me slow down, listen to myself, and respond instead of react. It completely changed how I experience my life.',
+    italic: 'experience my life',
+    name: 'Lena M.',
+    meta: 'Practicing 14 months',
+    photo: '/Lena.png',
+  },
+  {
+    quote:
+      'I came in expecting flexibility. I left with a way of being. The pauses between breaths became where I actually live.',
+    italic: 'where I actually live',
+    name: 'Priya R.',
+    meta: 'Practicing 8 months',
+    photo: '/Priya.png',
+  },
+  {
+    quote:
+      'It taught me that strength isn’t loud. It’s the quiet decision to stay with myself when everything else is asking me to leave.',
+    italic: 'stay with myself',
+    name: 'Marcus T.',
+    meta: 'Practicing 2 years',
+    photo: '/marcus.png',
+  },
+];
+
+const PILLS = [
+  { label: 'Intentional Movement', x: -34, y: 10, rot: -8, delay: 0 },
+  { label: 'Purposeful Breathing', x: 2, y: -10, rot: 4, delay: 120 },
+  { label: 'Empowered Strength', x: -10, y: 40, rot: -2, delay: 240 },
+  { label: 'Inner Harmony', x: 28, y: 22, rot: 6, delay: 360 },
+  { label: 'Quiet Mind', x: 34, y: -18, rot: 10, delay: 480 },
+  { label: 'Daily Stillness', x: -30, y: -22, rot: -10, delay: 600 },
+];
+---
+
+<section class="relative overflow-hidden bg-black px-6 pt-0 pb-32 text-white md:pb-44">
+  <video
+    class="absolute inset-0 h-full w-full object-cover"
+    src="/tstimonials-bg.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+    aria-hidden="true"
+  ></video>
+  <div class="absolute inset-0 bg-black/60" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black to-transparent" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" aria-hidden="true"></div>
+
+  <div class="light-leak-top pointer-events-none absolute inset-0"></div>
+
+  <div class="relative mx-auto max-w-5xl pt-20 text-center md:pt-28">
+    <p class="reveal font-mono mb-10 text-[10px] tracking-[0.3em] text-white/40 uppercase">
+      A note from a practitioner
+    </p>
+
+    <div class="testimonial-stage relative" data-testimonial>
+      <button
+        type="button"
+        aria-label="Previous testimonial"
+        class="testimonial-arrow left-0 md:-left-4"
+        data-testimonial-prev
+      >
+        <Icon name="lucide:chevron-left" size={20} stroke-width={1.5} />
+      </button>
+      <button
+        type="button"
+        aria-label="Next testimonial"
+        class="testimonial-arrow right-0 md:-right-4"
+        data-testimonial-next
+      >
+        <Icon name="lucide:chevron-right" size={20} stroke-width={1.5} />
+      </button>
+
+      <div class="testimonial-slides px-10 md:px-16">
+        {
+          TESTIMONIALS.map((t, i) => {
+            const [pre, post] = t.italic && t.quote.includes(t.italic)
+              ? t.quote.split(t.italic)
+              : [t.quote, ''];
+            return (
+              <div
+                class:list={['testimonial-slide', i === 0 && 'is-active']}
+                data-testimonial-slide
+                aria-hidden={i !== 0 ? 'true' : 'false'}
+              >
+                <blockquote>
+                  <span class="quote font-serif block leading-[1.15] text-white/95 text-balance">
+                    <em class="text-white/60 italic">“</em>
+                    {pre}
+                    {t.italic && t.quote.includes(t.italic) && (
+                      <em class="italic">{t.italic}</em>
+                    )}
+                    {post}
+                    <em class="text-white/60 italic">”</em>
+                  </span>
+                </blockquote>
+                <div class="mt-8 flex items-center justify-center gap-4 md:mt-12">
+                  {t.photo ? (
+                    <img
+                      src={t.photo}
+                      alt={t.name}
+                      class="h-12 w-12 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div class="placeholder-stripes liquid-glass flex h-12 w-12 items-center justify-center rounded-full">
+                      <span class="font-mono text-[9px] text-white/40">photo</span>
+                    </div>
+                  )}
+                  <div class="text-left">
+                    <p class="text-sm text-white">{t.name}</p>
+                    <p class="font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">
+                      {t.meta}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <div class="mt-10 flex items-center justify-center gap-2" data-testimonial-dots>
+      {
+        TESTIMONIALS.map((_, i) => (
+          <button
+            type="button"
+            aria-label={`Testimonial ${i + 1}`}
+            class:list={['testimonial-dot', i === 0 && 'is-active']}
+            data-testimonial-dot
+            data-idx={i}
+          />
+        ))
+      }
+    </div>
+
+    <div class="pill-rain relative mx-auto mt-16" data-pill-rain>
+      {
+        PILLS.map((p) => (
+          <span
+            class="pill-tag liquid-glass"
+            style={`--x: ${p.x}%; --y: ${p.y}px; --rot: ${p.rot}deg; --delay: ${p.delay}ms;`}
+          >
+            <span class="pill-dot" aria-hidden="true">
+              <Icon name="lucide:check" size={10} stroke-width={2.5} />
+            </span>
+            <span class="whitespace-nowrap">{p.label}</span>
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .quote {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .quote {
+      font-size: 3rem;
+    }
+  }
+
+  .testimonial-stage {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 28px;
+    padding: 2.5rem 0.5rem;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .testimonial-slides {
+    display: grid;
+  }
+  .testimonial-slide {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+    transition:
+      opacity 600ms ease,
+      transform 600ms ease;
+  }
+  .testimonial-slide.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition-delay: 80ms;
+  }
+
+  .testimonial-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.85);
+    background: transparent;
+    border: none;
+    transition:
+      background 220ms ease,
+      transform 220ms ease,
+      border-color 220ms ease;
+    z-index: 4;
+    cursor: pointer;
+  }
+  .testimonial-arrow:hover {
+    background: transparent;
+    transform: translateY(-50%) scale(1.05);
+  }
+  @media (max-width: 640px) {
+    .testimonial-arrow {
+      width: 38px;
+      height: 38px;
+    }
+  }
+
+  .testimonial-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    border: 0;
+    transition:
+      width 300ms ease,
+      background 300ms ease;
+  }
+  .testimonial-dot.is-active {
+    width: 22px;
+    background: rgba(255, 255, 255, 0.85);
+  }
+
+  .pill-rain {
+    width: min(100%, 720px);
+    height: 260px;
+  }
+
+  .pill-tag {
+    position: absolute;
+    left: calc(50% + var(--x));
+    top: calc(50% + var(--y));
+    transform: translate(-50%, calc(-50% - 60vh)) rotate(calc(var(--rot) * 2));
+    opacity: 0;
+    transition:
+      transform 1100ms cubic-bezier(0.22, 1.2, 0.36, 1) var(--delay),
+      opacity 600ms ease var(--delay);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px 10px 10px;
+    border-radius: 999px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.005em;
+    will-change: transform;
+    cursor: default;
+  }
+  .pill-rain.is-shown .pill-tag {
+    transform: translate(-50%, -50%) rotate(var(--rot));
+    opacity: 1;
+  }
+  .pill-rain.is-shown .pill-tag:hover {
+    transform: translate(-50%, calc(-50% - 10px)) rotate(var(--rot)) scale(1.07);
+    transition:
+      transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 280ms ease;
+    cursor: default;
+    z-index: 20;
+  }
+
+  .pill-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.95);
+    flex-shrink: 0;
+  }
+
+  /* Mobile: pills switch from absolute-positioned scatter to flex-wrap */
+  @media (max-width: 639px) {
+    .pill-rain {
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      padding: 4px 0;
+    }
+
+    .pill-tag {
+      position: relative;
+      left: 0;
+      top: 0;
+      transform: translateY(16px);
+      opacity: 0;
+      font-size: 12px;
+      padding: 8px 12px 8px 8px;
+    }
+
+    .pill-rain.is-shown .pill-tag {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .pill-rain.is-shown .pill-tag:hover {
+      transform: translateY(-4px);
+      transition: transform 200ms ease;
+    }
+
+    .testimonial-stage {
+      border-radius: 20px;
+      padding-top: 1.75rem;
+      padding-bottom: 1.75rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .testimonial-slide,
+    .testimonial-dot,
+    .pill-tag {
+      transition: none;
+    }
+    .pill-tag {
+      transform: translate(-50%, -50%) rotate(var(--rot));
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 639px) and (prefers-reduced-motion: reduce) {
+    .pill-tag {
+      transform: none;
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  const stage = document.querySelector<HTMLElement>('[data-testimonial]');
+  if (stage) {
+    const slides = stage.querySelectorAll<HTMLElement>('[data-testimonial-slide]');
+    const dots = stage.parentElement?.querySelectorAll<HTMLButtonElement>('[data-testimonial-dot]');
+    const total = slides.length;
+    let idx = 0;
+
+    const update = (next: number) => {
+      idx = ((next % total) + total) % total;
+      slides.forEach((el, i) => {
+        const active = i === idx;
+        el.classList.toggle('is-active', active);
+        el.setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
+      dots?.forEach((el, i) => el.classList.toggle('is-active', i === idx));
+    };
+
+    stage
+      .querySelector<HTMLButtonElement>('[data-testimonial-prev]')
+      ?.addEventListener('click', () => update(idx - 1));
+    stage
+      .querySelector<HTMLButtonElement>('[data-testimonial-next]')
+      ?.addEventListener('click', () => update(idx + 1));
+    dots?.forEach((dot, i) => dot.addEventListener('click', () => update(i)));
+  }
+
+  const rain = document.querySelector<HTMLElement>('[data-pill-rain]');
+  if (rain && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            rain.classList.add('is-shown');
+            io.disconnect();
+          }
+        });
+      },
+      { threshold: 0.4 },
+    );
+    io.observe(rain);
+  } else if (rain) {
+    rain.classList.add('is-shown');
+  }
+</script>

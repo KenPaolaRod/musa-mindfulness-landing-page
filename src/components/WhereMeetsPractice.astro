@@ -1,0 +1,246 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const benefits = [
+  { kicker: '01', text: 'Reduce stress and anxiety' },
+  { kicker: '02', text: 'Improve focus and clarity' },
+  { kicker: '03', text: 'Regulate emotions' },
+  { kicker: '04', text: 'Increase self-awareness' },
+  { kicker: '05', text: 'Support overall well-being' },
+];
+const totalLabel = String(benefits.length).padStart(2, '0');
+---
+
+<section class="relative overflow-hidden bg-black text-white">
+  <div class="pointer-events-none absolute inset-0 overflow-hidden">
+    <iframe
+      class="bg-iframe"
+      src="https://player.vimeo.com/video/1189981564?background=1&autoplay=1&loop=1&muted=1&autopause=0"
+      title="Mindfulness background"
+      allow="autoplay; fullscreen; picture-in-picture"
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <div class="bg-tint absolute inset-0"></div>
+  </div>
+
+  <div class="edge-top pointer-events-none absolute inset-x-0 top-0 z-[1] h-40"></div>
+  <div class="edge-bottom pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-40"></div>
+
+  <div
+    class="relative mx-auto flex min-h-screen max-w-[1400px] flex-col justify-between px-6 pt-28 pb-12 md:px-10 md:pt-36 md:pb-16 lg:px-14"
+  >
+    <div class="reveal max-w-3xl">
+      <p class="mb-6 text-sm font-medium text-white/85 md:text-base">More Than Meditation</p>
+      <h2 class="presence-heading font-serif mb-10 tracking-tight text-white">
+        Where presence<br />meets <em class="italic">practice.</em>
+      </h2>
+      <a
+        href="#start"
+        class="inline-flex items-center gap-3 rounded-full bg-white py-2 pr-2 pl-6 text-sm font-medium text-black transition-all hover:bg-white/90 active:scale-[0.98]"
+      >
+        <span>Start Doing Today</span>
+        <span class="flex items-center justify-center rounded-full bg-black p-2 text-white">
+          <Icon name="lucide:arrow-right" size={14} stroke-width={2} />
+        </span>
+      </a>
+    </div>
+
+    <div
+      class="cards-slider mt-16 -mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 md:mx-0 md:mt-24 md:grid md:grid-cols-2 md:overflow-x-visible md:px-0 md:gap-5"
+      data-cards-slider
+    >
+      <div class="liquid-glass reveal snap-start shrink-0 w-[85vw] rounded-3xl p-6 md:w-auto md:shrink md:p-7">
+        <p class="font-mono mb-4 text-[10px] tracking-[0.3em] text-white/50 uppercase">
+          What is mindfulness
+        </p>
+        <p
+          class="mb-3 text-base leading-relaxed text-pretty text-white/95 md:text-[15px]"
+        >
+          The practice of paying attention to the present moment, without judgment — a skill you
+          can train to reduce stress, improve focus, and cultivate emotional well-being.
+        </p>
+        <p class="benefits-coda font-serif text-sm leading-relaxed text-white/65 italic">
+          No experience needed—just a willingness to pause, breathe, and notice.
+        </p>
+      </div>
+
+      <div
+        class="liquid-glass reveal snap-start shrink-0 w-[85vw] flex gap-5 rounded-3xl p-6 md:w-auto md:shrink md:p-7"
+        style="transition-delay: 100ms;"
+        data-benefits-card
+      >
+        <div class="min-w-0 flex-1">
+          <p class="font-mono mb-4 text-[10px] tracking-[0.3em] text-white/50 uppercase">
+            Benefits
+          </p>
+          <ul class="benefits-list scroll-smooth space-y-4 pr-2" data-benefits-list>
+            {
+              benefits.map((b, i) => (
+                <li
+                  class:list={['benefit-item', 'flex items-baseline gap-4', i === 0 && 'is-active']}
+                  data-benefits-item
+                >
+                  <span class="benefit-kicker font-serif flex-shrink-0 leading-none text-white/90">
+                    {b.kicker}
+                  </span>
+                  <span class="text-[15px] leading-snug text-white/90">{b.text}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="flex flex-col items-center pt-1">
+          <p class="font-mono mb-2 text-[9px] tracking-[0.25em] text-white/40 uppercase">
+            <span data-benefits-counter>01</span>
+            <span class="text-white/25"> / {totalLabel}</span>
+          </p>
+          <div class="rail relative min-h-[120px] w-[3px] flex-1 overflow-hidden rounded-full bg-white/10">
+            <div
+              class="rail-fill absolute inset-x-0 top-0 rounded-full bg-white/85"
+              data-benefits-fill></div>
+          </div>
+          <button
+            type="button"
+            aria-label="Next benefit"
+            class="mt-3 text-white/60 transition-colors hover:text-white"
+            data-benefits-next
+          >
+            <Icon name="lucide:chevron-down" size={16} stroke-width={1.75} />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4 flex justify-center gap-2 md:hidden" aria-hidden="true">
+      <span class="slider-dot h-1.5 w-5 rounded-full bg-white/70 transition-all" data-dot="0"></span>
+      <span class="slider-dot h-1.5 w-1.5 rounded-full bg-white/25 transition-all" data-dot="1"></span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bg-iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, 177.78vh);
+    height: max(56.25vw, 100%);
+    transform: translate(-50%, -50%);
+    border: 0;
+    pointer-events: none;
+  }
+
+  .bg-tint {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.25) 35%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
+  }
+
+  .edge-top {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.5) 50%,
+      transparent 100%
+    );
+  }
+
+  .edge-bottom {
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.5) 50%,
+      transparent 100%
+    );
+  }
+
+  .presence-heading {
+    font-size: clamp(2.6rem, 6vw, 5.5rem);
+    line-height: 1;
+  }
+
+  .benefits-list {
+    max-height: 180px;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .benefits-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .benefit-item {
+    opacity: 0.55;
+    transition: opacity 300ms ease;
+  }
+  .benefit-item.is-active {
+    opacity: 1;
+  }
+
+  .benefit-kicker {
+    font-size: 1.6rem;
+  }
+
+  .benefits-coda {
+    font-size: 1.05rem;
+  }
+
+  .rail-fill {
+    height: 15%;
+    transition: height 200ms ease;
+  }
+
+  .cards-slider {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .cards-slider::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  const card = document.querySelector<HTMLElement>('[data-benefits-card]');
+  if (card) {
+    const list = card.querySelector<HTMLElement>('[data-benefits-list]');
+    const counter = card.querySelector<HTMLElement>('[data-benefits-counter]');
+    const fill = card.querySelector<HTMLElement>('[data-benefits-fill]');
+    const items = card.querySelectorAll<HTMLElement>('[data-benefits-item]');
+    const next = card.querySelector<HTMLButtonElement>('[data-benefits-next]');
+    const total = items.length;
+
+    if (list && counter && fill && total > 0) {
+      const update = () => {
+        const max = list.scrollHeight - list.clientHeight;
+        const p = max > 0 ? list.scrollTop / max : 0;
+        const idx = Math.min(total - 1, Math.round(p * (total - 1)));
+        fill.style.height = `${Math.max(15, p * 100)}%`;
+        counter.textContent = String(idx + 1).padStart(2, '0');
+        items.forEach((el, i) => el.classList.toggle('is-active', i === idx));
+      };
+
+      list.addEventListener('scroll', update, { passive: true });
+      next?.addEventListener('click', () => list.scrollBy({ top: 60, behavior: 'smooth' }));
+      update();
+    }
+  }
+
+  const slider = document.querySelector<HTMLElement>('[data-cards-slider]');
+  const dots = document.querySelectorAll<HTMLElement>('[data-dot]');
+  if (slider && dots.length) {
+    const updateDots = () => {
+      const idx = Math.round(slider.scrollLeft / slider.offsetWidth);
+      dots.forEach((d, i) => {
+        const active = i === idx;
+        d.classList.toggle('bg-white/70', active);
+        d.classList.toggle('w-5', active);
+        d.classList.toggle('bg-white/25', !active);
+        d.classList.toggle('w-1.5', !active);
+      });
+    };
+    slider.addEventListener('scroll', updateDots, { passive: true });
+  }
+</script>

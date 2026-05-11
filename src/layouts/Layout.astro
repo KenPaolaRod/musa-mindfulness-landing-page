@@ -1,0 +1,110 @@
+---
+import { Font } from 'astro:assets';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = 'Asme — Find calm in the middle of the noise',
+  description = 'Train your mind, reconnect with your body, and live with intention.',
+  ogImage = '/og-image.jpg',
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImageUrl = new URL(ogImage, Astro.site).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+
+    <meta name="theme-color" content="#000000" />
+    <meta name="color-scheme" content="dark" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+
+    <link rel="preconnect" href="https://player.vimeo.com" crossorigin />
+
+    <Font cssVariable="--font-instrument" preload />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const targets = document.querySelectorAll('.reveal');
+
+      if (reduceMotion) {
+        targets.forEach((el) => el.classList.add('in'));
+      } else if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('in');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: '0px 0px -8% 0px' },
+        );
+        targets.forEach((el) => io.observe(el));
+      } else {
+        targets.forEach((el) => el.classList.add('in'));
+      }
+
+      const lazyVideos = document.querySelectorAll<HTMLVideoElement>('video[data-src]');
+      if (lazyVideos.length > 0 && 'IntersectionObserver' in window) {
+        const vio = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const v = entry.target as HTMLVideoElement;
+              const src = v.dataset.src;
+              if (src && !v.src) {
+                v.src = src;
+                v.load();
+                v.play().catch(() => {});
+              }
+              vio.unobserve(v);
+            });
+          },
+          { rootMargin: '400px 0px' },
+        );
+        lazyVideos.forEach((v) => vio.observe(v));
+      } else {
+        lazyVideos.forEach((v) => {
+          const src = v.dataset.src;
+          if (src) v.src = src;
+        });
+      }
+    </script>
+  </body>
+</html>

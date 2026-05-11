@@ -1,0 +1,429 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const HERO = {
+  videoUrl:
+    'https://player.vimeo.com/video/1189978446?background=1&autoplay=1&loop=1&muted=1&autopause=0',
+  subline: 'Train your mind, reconnect with your body, and live with intention.',
+  primaryCta: 'Get Started',
+  secondaryCta: 'Explore Practices',
+  manifesto:
+    'Mindfulness isn’t about escaping your life—it’s about learning to fully live it with clarity, presence, and balance.',
+};
+
+const sublineWords = HERO.subline.split(' ');
+
+const navLinks = [
+  { label: 'Practices', href: '#practices' },
+  { label: 'Programs', href: '#programs' },
+  { label: 'About', href: '#about' },
+];
+const socials = [
+  { icon: 'lucide:instagram', label: 'Instagram' },
+  { icon: 'lucide:twitter', label: 'Twitter' },
+  { icon: 'lucide:globe', label: 'Website' },
+];
+---
+
+<section class="relative h-screen overflow-hidden bg-black">
+  <div class="hero-video pointer-events-none absolute inset-0 overflow-hidden">
+    <iframe
+      class="hero-iframe"
+      src={HERO.videoUrl}
+      title="Background video"
+      allow="autoplay; fullscreen; picture-in-picture"
+      loading="eager"
+      referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </div>
+
+  <nav class="fixed inset-x-0 top-0 z-50 px-6 py-6">
+    <div class="mx-auto flex max-w-5xl items-center justify-between rounded-full px-6 py-3">
+      <div class="flex items-center gap-8">
+        <a href="#" class="flex items-center">
+          <img src="/logo.png" alt="Logo" class="h-10 w-auto" />
+        </a>
+        <div class="hidden items-center gap-8 md:flex">
+          {
+            navLinks.map(({ label, href }) => (
+              <a
+                href={href}
+                class="text-sm font-medium text-white/80 transition-colors hover:text-white"
+              >
+                {label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="#contact" class="liquid-glass rounded-full px-6 py-2 text-sm font-medium text-white">
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="relative z-10 flex h-full flex-col">
+    <main
+      class="relative z-10 flex flex-1 flex-col items-center justify-center px-6 py-12 text-center"
+    >
+      <div id="hero-text-block" class="hero-text-block">
+        <h1
+          class="hero-headline font-serif mb-6 tracking-tight text-white"
+          id="hero-h1"
+          aria-label="Find calm in the middle of the noise."
+        >
+          <span class="word" style="--i:0">Find</span>
+          <span class="word word--calm" style="--i:1">calm</span>
+          <span class="word" style="--i:2">in</span>
+          <span class="word" style="--i:3">the</span><br />
+          <span class="word" style="--i:4">middle</span>
+          <span class="word" style="--i:5">of</span>
+          <span class="word" style="--i:6">the</span>
+          <span class="word" style="--i:7">noise.</span>
+        </h1>
+
+        <p id="hero-subline" class="hero-subline mb-10 mx-auto max-w-xl px-4 text-base text-white/75 md:text-lg">
+          {sublineWords.map((w, i) => (
+            <span class="subword" style={`--j:${i}`}>{w}</span>
+          ))}
+        </p>
+      </div>
+
+      <div class="mb-12 mx-auto flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <button
+          id="get-started-btn"
+          type="button"
+          class="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-medium text-black transition-all hover:bg-white/90 active:scale-[0.98]"
+        >
+          {HERO.primaryCta}
+          <Icon name="lucide:arrow-right" size={16} stroke-width={2} />
+        </button>
+        <a
+          href="#practices"
+          class="liquid-glass rounded-full px-7 py-3 text-sm font-medium text-white transition-colors hover:bg-white/5"
+        >
+          {HERO.secondaryCta}
+        </a>
+      </div>
+
+      <p class="hero-manifesto font-serif mx-auto max-w-xl px-4 text-sm leading-relaxed text-white/55 italic">
+        {HERO.manifesto}
+      </p>
+    </main>
+
+    <div class="relative z-10 flex justify-center gap-4 pb-12">
+      {
+        socials.map((s) => (
+          <button
+            type="button"
+            aria-label={s.label}
+            class="liquid-glass rounded-full p-4 text-white/80 transition-all hover:bg-white/5 hover:text-white"
+          >
+            <Icon name={s.icon} size={20} stroke-width={1.75} />
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+</section>
+
+<style>
+  .hero-video {
+    filter: brightness(80%);
+  }
+
+  .hero-iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100vw, 177.78vh);
+    height: max(56.25vw, 100vh);
+    transform: translate(-50%, -50%);
+    border: 0;
+    pointer-events: none;
+  }
+
+  .hero-headline {
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    line-height: 1.15;
+  }
+
+  .hero-manifesto {
+    font-size: 1.15rem;
+  }
+
+  /* ── word-appear animation ── */
+  .word {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(64px);
+    transition:
+      opacity   1.5s cubic-bezier(0.31, 1.01, 0.55, 0.97),
+      filter    1.5s cubic-bezier(0.31, 1.01, 0.55, 0.97),
+      transform 1.5s cubic-bezier(0.31, 1.01, 0.55, 0.97);
+    transition-delay: calc(0.2s + var(--i) * 0.1s);
+  }
+
+  .hero-headline.visible .word {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+
+  .word--calm {
+    font-style: italic;
+    color: color-mix(in oklab, var(--color-white) 60%, transparent);
+  }
+
+  /* ── container appear ── */
+  .hero-text-block {
+    opacity: 0;
+    transform: translateY(25px);
+    transition:
+      opacity   1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
+      transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+  }
+
+  .hero-text-block.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── paragraph word-appear ── */
+  .hero-subline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 0.35em;
+    line-height: 1.625;
+  }
+
+  .subword {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(40px);
+    transition:
+      opacity   1.2s cubic-bezier(0.31, 1.01, 0.55, 0.97),
+      filter    1.2s cubic-bezier(0.31, 1.01, 0.55, 0.97),
+      transform 1.2s cubic-bezier(0.31, 1.01, 0.55, 0.97);
+    transition-delay: calc(0.5s + var(--j) * 0.1s);
+  }
+
+  #hero-subline.visible .subword {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .word,
+    .subword {
+      opacity: 1;
+      filter: none;
+      transform: none;
+      transition: none;
+    }
+
+    .hero-text-block {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<!-- Contact Us Modal -->
+<div
+  id="contact-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+  class="contact-modal fixed inset-0 z-[100] flex items-center justify-center p-4"
+>
+  <div id="modal-backdrop" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+
+  <div class="contact-modal-card relative w-full max-w-md rounded-3xl p-8 text-white shadow-2xl">
+    <button
+      id="modal-close"
+      type="button"
+      aria-label="Close"
+      class="absolute right-5 top-5 rounded-full p-2 text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+    >
+      <Icon name="lucide:x" size={18} stroke-width={2} />
+    </button>
+
+    <h2 id="modal-title" class="modal-title font-serif mb-1 font-medium tracking-tight">Get Started</h2>
+    <p class="mb-7 text-sm text-white/55">We'd love to hear from you. Send us a message.</p>
+
+    <form id="contact-form" novalidate class="flex flex-col gap-4">
+      <div class="flex flex-col gap-1.5">
+        <label for="cf-name" class="text-xs font-medium uppercase tracking-widest text-white/50">Name</label>
+        <input
+          id="cf-name"
+          name="name"
+          type="text"
+          required
+          placeholder="Your name"
+          class="contact-input rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 outline-none"
+        />
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label for="cf-email" class="text-xs font-medium uppercase tracking-widest text-white/50">Email</label>
+        <input
+          id="cf-email"
+          name="email"
+          type="email"
+          required
+          placeholder="you@example.com"
+          class="contact-input rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 outline-none"
+        />
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label for="cf-message" class="text-xs font-medium uppercase tracking-widest text-white/50">Message</label>
+        <textarea
+          id="cf-message"
+          name="message"
+          required
+          rows="4"
+          placeholder="What's on your mind?"
+          class="contact-input resize-none rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 outline-none"
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-medium text-black transition-all hover:bg-white/90 active:scale-[0.98]"
+      >
+        Send Message
+        <Icon name="lucide:send" size={15} stroke-width={2} />
+      </button>
+    </form>
+
+    <p id="form-success" class="mt-4 hidden text-center text-sm text-white/70">
+      Thanks! We'll be in touch soon.
+    </p>
+  </div>
+</div>
+
+<style>
+  .contact-modal {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .contact-modal.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .contact-modal-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transform: translateY(24px) scale(0.97);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+    opacity: 0;
+  }
+
+  .contact-modal.open .contact-modal-card {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  .contact-input {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .modal-title {
+      font-size: 2.5rem;
+    }
+  }
+
+  .contact-input:focus {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
+  }
+</style>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function observeOnce(el: HTMLElement, threshold: number) {
+    if (reduceMotion) {
+      el.classList.add('visible');
+      return;
+    }
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            el.classList.add('visible');
+            io.disconnect();
+          }
+        },
+        { threshold },
+      );
+      io.observe(el);
+    } else {
+      el.classList.add('visible');
+    }
+  }
+
+  const textBlock = document.getElementById('hero-text-block') as HTMLElement | null;
+  const headline  = document.getElementById('hero-h1')         as HTMLElement | null;
+  const subline   = document.getElementById('hero-subline')    as HTMLElement | null;
+
+  if (textBlock) observeOnce(textBlock, 0.5);
+  if (headline)  observeOnce(headline,  0);
+  if (subline)   observeOnce(subline,   0);
+
+  // Contact modal
+  const modal        = document.getElementById('contact-modal') as HTMLElement | null;
+  const openBtn      = document.getElementById('get-started-btn') as HTMLElement | null;
+  const closeBtn     = document.getElementById('modal-close') as HTMLElement | null;
+  const backdrop     = document.getElementById('modal-backdrop') as HTMLElement | null;
+  const contactForm  = document.getElementById('contact-form') as HTMLFormElement | null;
+  const successMsg   = document.getElementById('form-success') as HTMLElement | null;
+
+  function openModal() {
+    modal?.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => (closeBtn as HTMLElement | null)?.focus(), 50);
+  }
+
+  function closeModal() {
+    modal?.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  openBtn?.addEventListener('click', openModal);
+  closeBtn?.addEventListener('click', closeModal);
+  backdrop?.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('open')) closeModal();
+  });
+
+  contactForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    contactForm.style.display = 'none';
+    if (successMsg) successMsg.classList.remove('hidden');
+    setTimeout(closeModal, 2200);
+  });
+</script>

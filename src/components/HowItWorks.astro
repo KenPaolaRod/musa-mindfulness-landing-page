@@ -1,0 +1,125 @@
+---
+const steps = [
+  { n: '1', title: 'Breathe', body: 'Anchor yourself in the present through your breath.' },
+  {
+    n: '2',
+    title: 'Observe',
+    body: 'Notice thoughts and emotions without reacting automatically.',
+  },
+  { n: '3', title: 'Integrate', body: 'Bring this awareness into your daily life.' },
+];
+
+const VIDEO_SRC =
+  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260506_031045_0e1165dd-ab48-46e3-ad3d-5fe77f217647.mp4';
+---
+
+<section id="programs" class="relative overflow-hidden text-white">
+  <div class="pointer-events-none absolute inset-0 overflow-hidden">
+    <video
+      class="bg-video"
+      data-src={VIDEO_SRC}
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="none"
+      aria-hidden="true"></video>
+    <div class="bg-tint absolute inset-0"></div>
+  </div>
+
+  <div class="edge-top pointer-events-none absolute inset-x-0 top-0 z-[1] h-40"></div>
+  <div class="edge-bottom pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-40"></div>
+
+  <div class="relative px-6 py-32 md:py-40">
+    <div class="light-leak-bottom pointer-events-none absolute inset-0"></div>
+    <div class="relative mx-auto max-w-6xl">
+      <div class="reveal mb-20 text-center md:mb-24">
+        <p class="font-mono mb-6 text-[10px] tracking-[0.3em] text-white/40 uppercase">
+          Section 02 / Method
+        </p>
+        <h2 class="method-heading font-serif tracking-tight">
+          How <em class="italic">it works</em>
+        </h2>
+      </div>
+
+      <ol class="grid gap-5 md:grid-cols-3 md:gap-6">
+        {
+          steps.map((s, i) => (
+            <li
+              class="liquid-glass reveal flex min-h-[280px] flex-col gap-6 rounded-3xl p-8 md:p-10"
+              style={`transition-delay: ${i * 120}ms;`}
+            >
+              <div class="flex items-baseline justify-between">
+                <span class="step-number font-serif leading-none text-white/90">{s.n}</span>
+                <span class="font-mono text-[10px] tracking-[0.3em] text-white/35 uppercase">
+                  step
+                </span>
+              </div>
+              <div class="hairline" />
+              <div>
+                <h3 class="step-title font-serif mb-3 text-white">{s.title}</h3>
+                <p class="text-sm leading-relaxed text-pretty text-white/65">{s.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: none;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    filter: brightness(70%);
+  }
+
+  .bg-tint {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.25) 35%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
+  }
+
+  .edge-top {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.5) 50%,
+      transparent 100%
+    );
+  }
+
+  .edge-bottom {
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.5) 50%,
+      transparent 100%
+    );
+  }
+
+  .method-heading {
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    line-height: 1.05;
+  }
+
+  .step-number {
+    font-size: 5.5rem;
+  }
+
+  .step-title {
+    font-size: clamp(1.5rem, 3vw, 1.875rem);
+  }
+</style>
